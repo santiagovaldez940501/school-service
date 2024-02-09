@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template :: head">
+</head>
+<body>
+	<header th:replace="common/template :: header"></header>
+
+	<div class="container">
+	
+	<div class="card bg-light">
+		<div class="card-header bg-dark text-white" th:text="${titulo}"></div>
+		<div class="card-body">
+	
+		<form th:action="@{/views/alumnogrados/save}" th:object="${alumnoGrado}" method="post">
+			
+			<div class="form-group row">
+				<label class="col-md-2" for="alumno">Alumno:</label> 
+				<select th:field="*{alumno}" class="form-control form-control-sm col-md-6" id="alumno"> 
+					<option value="">--Por favor selecciona una opción-</option>
+					<option th:each="alumno:${alumnos}"
+						th:value="${alumno.id}"
+						th:text="${alumno.nombre}"		
+					/>					
+				</select>
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('alumno')}"
+					th:errors="*{alumno}">
+				</small>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-md-2" for="grado">Grado:</label> 
+				<select th:field="*{grado}" class="form-control form-control-sm col-md-6" id="grado"> 
+					<option value="">--Por favor selecciona una opción-</option>
+					<option th:each="grado:${grados}"
+						th:value="${grado.id}"
+						th:text="${grado.nombre}"		
+					/>					
+				</select>
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('grado')}"
+					th:errors="*{grado}">
+				</small>
+			</div>
+			
+			<div class="form-group row">
+				
+				<input type="hidden" th:field="*{id}">
+				<label class="col-md-2" for="grupo">Grupo:</label> 
+				<input type="text" th:field="*{grupo}" class="form-control form-control-sm col-md-6" id="grupo"
+					placeholder="Nombre del grupo"> 
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('grupo')}"
+						th:errors="*{grupo}">
+					</small>
+			</div>
+			
+			<div class="card-footer bg-dark">
+				<input type="submit" class="btn btn-primary btn-sm" value="Guardar">
+			</div>
+			
+		</form>
+		</div>
+	</div>
+
+	</div>
+
+	<footer th:replace="common/template :: footer"></footer>
+
+</body>
+</html>

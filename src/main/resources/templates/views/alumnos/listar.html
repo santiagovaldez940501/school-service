@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template :: head">
+</head>
+<body>
+	<header th:replace="common/template :: header"></header>
+
+	<div class="container">		
+		<h1 th:text="${titulo}"></h1>		
+	</div>
+	
+	<div class="container">
+		
+		<a class="btn btn-primary btn-sm" th:href="@{/views/alumnos/create}"
+			th:text="'Crear nuevo'" title="Crear Nuevo Registro">
+		</a>
+		<br>
+		<br>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Nombre(s)</th>
+					<th scope="col">Apellidos</th>
+					<th scope="col">Género</th>
+					<th scope="col">Fecha de nacimiento</th>
+					<th scope="col">Editar</th>
+					<th scope="col">Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="a:${alumnos}">
+					<th scope="row" th:text="${a.id}"></th>
+					<td th:text="${a.nombre}"></td>
+					<td th:text="${a.apellidos}"></td>
+					<td th:text="${a.genero}"></td>
+					<td th:text="${a.fechaNacimiento}"></td>
+					<td>
+						<a class="btn btn-success btn-sm" th:href="@{/views/alumnos/edit/} + ${a.id}"
+							th:text="'Editar'" title="Editar Registro">
+						</a>
+					</td>	
+					<td>
+						<a class="btn btn-danger btn-sm" th:href="@{/views/alumnos/delete/} + ${a.id}"
+							th:text="'Eliminar'" title="Eliminar Alumno"
+							onclick="return confirm('¿Esta seguro de eliminar el alumno?');">
+						</a>
+					</td>					
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+
+	<footer th:replace="common/template :: footer"></footer>
+
+</body>
+</html>

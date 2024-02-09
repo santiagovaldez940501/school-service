@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template :: head">
+</head>
+<body>
+	<header th:replace="common/template :: header"></header>
+
+	<div class="container">
+	
+	<div class="card bg-light">
+		<div class="card-header bg-dark text-white" th:text="${titulo}"></div>
+		<div class="card-body">
+	
+		<form th:action="@{/views/grados/save}" th:object="${grado}" method="post">
+			<div class="form-group row">
+				
+				<input type="hidden" th:field="*{id}">
+				<label class="col-md-2" for="nombre">Nombre:</label> 
+				<input type="text" th:field="*{nombre}" class="form-control form-control-sm col-md-6" id="nombre"
+					placeholder="Nombre del grado"> 
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
+						th:errors="*{nombre}">
+					</small>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-md-2" for="profesor">Profesor:</label> 
+				<select th:field="*{profesor}" class="form-control form-control-sm col-md-6" id="profesor"> 
+					<option value="">--Por favor selecciona una opción-</option>
+					<option th:each="profesor:${profesores}"
+						th:value="${profesor.id}"
+						th:text="${profesor.nombre}"		
+					/>					
+				</select>
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('profesor')}"
+					th:errors="*{profesor}">
+				</small>
+			</div>
+			
+			<div class="card-footer bg-dark">
+				<input type="submit" class="btn btn-primary btn-sm" value="Guardar">
+			</div>
+			
+		</form>
+		</div>
+	</div>
+
+	</div>
+
+	<footer th:replace="common/template :: footer"></footer>
+
+</body>
+</html>
