@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 public class Alumno {
@@ -19,9 +20,11 @@ public class Alumno {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Pattern(regexp = "^[a-zA-Z\\s+]*$")
 	@NotEmpty
 	private String nombre;
 	
+	@Pattern(regexp = "^[a-zA-Z\\s+]*$")
 	@NotEmpty
 	private String apellidos;
 	
@@ -45,6 +48,13 @@ public class Alumno {
 		this.genero = genero;
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
+	public String getNombreCompleto() {
+		
+		return this.nombre + " " + this.apellidos;
+	}
+	
+	
 
 	public Long getId() {
 		return id;
